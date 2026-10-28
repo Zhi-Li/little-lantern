@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#132820">
+  <meta name="description" content="A cozy memory maze adventure. Carry a little lantern, remember your turns, and find your way home.">
+  <title>Little Lantern · Find your way home</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./src/game.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Little Lantern home"><span class="brand-mark" data-icon="lantern"></span><span>little lantern<span class="brand-sub">A WOODLAND ADVENTURE</span></span></a>
+      <nav aria-label="Game options"><button class="text-button" id="sound" aria-pressed="false"><span data-icon="sound"></span><span id="sound-label">Sound off</span></button><button class="text-button" id="help"><span data-icon="help"></span>How to play</button><a class="source-link" href="https://github.com/Zhi-Li/little-lantern" target="_blank" rel="noopener" aria-label="View source on GitHub"><span data-icon="github"></span></a></nav>
+    </header>
+    <main>
+      <section class="heading-row" aria-label="Introduction">
+        <div><p class="eyebrow"><span></span> A LITTLE COURAGE GOES A LONG WAY</p><h1>Little light. <em>Big adventure.</em></h1><p class="intro-copy">The woods are dark. Home is waiting. Remember the way.</p></div>
+        <div class="chapter-count"><span>08</span><div>chapters to explore<br><strong>one warm home</strong></div></div>
+      </section>
+      <div class="game-layout">
+        <section class="adventure" aria-label="Maze adventure">
+          <div class="stage-header"><div class="chapter-heading"><span id="chapter-badge">01</span><div><p id="chapter-kicker">CHAPTER ONE</p><h2 id="chapter-title">A light in the woods</h2></div></div><button class="icon-button" id="pause" title="Pause game (P)" aria-label="Pause game"><span data-icon="pause"></span></button></div>
+          <div class="board-wrap" id="board-wrap">
+            <div class="board-topline"><span><i class="live-dot"></i> THE WHISPERING WOODS</span><span id="map-size">7 × 7</span></div>
+            <canvas id="board" width="900" height="900" tabindex="0" aria-label="Maze. Use arrow keys or W A S D to move. Start at the top left and find home at the bottom right."></canvas>
+            <div class="corner-label start-label">START</div><div class="corner-label home-label"><span data-icon="home"></span> HOME</div>
+            <div class="board-overlay" id="overlay">
+              <div class="overlay-card" role="region" aria-labelledby="overlay-title"><div class="little-spark" data-icon="lantern"></div><p class="eyebrow" id="overlay-eyebrow">YOUR ADVENTURE AWAITS</p><h2 id="overlay-title">Let’s get you home.</h2><p id="overlay-copy">A lantern, a little courage, and a path only you can remember.</p><div id="result-stats" class="result-stats" hidden></div><button class="primary-button" id="primary">Begin adventure <span>↗</span></button><button class="secondary-button" id="secondary" hidden>Try this chapter again</button><p class="overlay-footnote" id="overlay-note">ARROW KEYS / WASD TO MOVE</p></div>
+            </div>
+          </div>
+          <div class="journey-bar"><div><span class="stat-icon" data-icon="steps"></span><strong id="steps">0</strong><span>steps</span></div><div><span class="stat-icon" data-icon="firefly"></span><strong id="fireflies">0 / 3</strong><span>fireflies</span></div><div><span class="stat-icon" data-icon="clock"></span><strong id="timer">00:00</strong></div><span class="journey-bar-end">ONE STEP AT A TIME</span></div>
+        </section>
+        <aside class="sidebar">
+          <section class="pocket panel"><div class="section-label">YOUR LITTLE POCKET <span data-icon="backpack"></span></div><div class="inventory-item equipped"><div class="item-picture lantern-picture" data-icon="lantern"></div><div><h3>Lantern</h3><p>A small circle of comfort</p></div><span class="item-state">LIT</span></div><div class="inventory-item" id="sword-item"><div class="item-picture" data-icon="sword"></div><div><h3>Woodland sword</h3><p id="sword-state">Appears in chapter 2</p></div><span class="item-state" id="sword-badge">—</span></div><div class="inventory-item" id="key-item"><div class="item-picture" data-icon="key"></div><div><h3>House key</h3><p id="key-state">Not needed yet</p></div><span class="item-state" id="key-badge">—</span></div></section>
+          <section class="note-card"><span class="note-number" id="note-number">FIELD NOTE / 01</span><h3 id="note-title">The dark is part<br>of the adventure.</h3><p id="chapter-hint">Only nearby tiles are visible. Look closely, remember your turns, and trust your little light.</p><div class="note-divider"></div><div class="pebble-row"><span data-icon="pebble"></span><p><strong id="pebble-count">5 pebbles</strong><br>Leave a little reminder.</p><button id="pebble" class="key-button" title="Place or pick up a pebble (B)" aria-label="Place or pick up a pebble">B</button></div><small>Pebbles are visible in lantern light, too.</small></section>
+          <section class="chapter-panel panel"><div class="section-label">THE JOURNEY <span id="progress-label">1 / 8</span></div><div class="chapters" id="chapters" aria-label="Choose an unlocked chapter"></div><button class="restart-button" id="restart"><span data-icon="restart"></span>Retry chapter</button><button class="new-button" id="new-journey">Start a new journey</button></section>
+        </aside>
+      </div>
+      <section class="controls-row" aria-label="Movement controls"><div class="movement-help"><span class="keyboard-keys"><kbd>↑</kbd><span><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></span></span><p><strong>Follow your own footsteps.</strong><br>Arrow keys or WASD to move <span>·</span> P to pause</p></div><div class="dpad" aria-label="Touch movement controls"><button data-move="0,-1" aria-label="Move up">↑</button><button data-move="-1,0" aria-label="Move left">←</button><span data-icon="lantern"></span><button data-move="1,0" aria-label="Move right">→</button><button data-move="0,1" aria-label="Move down">↓</button></div></section>
+      <div class="message-bar"><span class="message-spark">✦</span><p id="message" role="status" aria-live="polite">A warm little home is waiting at the far corner of the woods.</p></div>
+    </main>
+    <footer><span>A small adventure about finding your way.</span><span>Made for curious hearts <i>✧</i></span></footer>
+  </div>
+  <dialog id="help-dialog"><button class="dialog-close icon-button" id="close-help" aria-label="Close instructions">×</button><p class="eyebrow">A GUIDE FOR LITTLE EXPLORERS</p><h2>Carry a light.<br>Remember the way.</h2><p>Start in the top-left corner and reach your home in the bottom-right. Move one tile at a time with <strong>arrow keys, WASD, the direction buttons, or a swipe on the board.</strong></p><ul class="help-rules"><li><span data-icon="lantern"></span><div><strong>Let your memory lead.</strong> The lantern reveals nearby tiles. Walls block light. Everything beyond its glow disappears, even places you have visited.</div></li><li><span data-icon="sword"></span><div><strong>Find your sword.</strong> From chapter 2, stepping on a snake without a sword ends the attempt. With a sword, walking onto it defeats it automatically. The sword lasts for the chapter.</div></li><li><span data-icon="key"></span><div><strong>Bring the house key.</strong> From chapter 4, find the golden key to unlock home. From chapter 6, use your sword to clear brambles.</div></li><li><span data-icon="pebble"></span><div><strong>Leave yourself a reminder.</strong> Press B or the pebble button to place one of five pebbles. Press again on that tile to pick it up. Fireflies are optional little treasures.</div></li></ul><p class="help-note">There is no fuel limit or time pressure. Retry keeps the same map. New journey creates fresh mazes. Your unlocked chapters are saved on this device.</p><button class="primary-button" id="help-done">I’m ready <span>↗</span></button></dialog>
+</body>
+</html>
