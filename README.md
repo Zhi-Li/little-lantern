@@ -6,15 +6,30 @@ Start at the **top-left** of the board and reach the warm little house at the **
 
 ## Play locally
 
-Install [Node.js](https://nodejs.org/) 20 or newer, then:
+**No installation or server is needed.** Open `play.html` in your browser by double-clicking it.
+
+If you already cloned the repository, update it and launch the game on macOS:
+
+```bash
+git pull
+open play.html
+```
+
+Or clone it for the first time:
 
 ```bash
 git clone https://github.com/Zhi-Li/little-lantern.git
 cd little-lantern
-npm start
+open play.html
 ```
 
-Open **http://localhost:3000**. There are no package dependencies to install. You can also serve the project with any static HTTP server; opening `index.html` directly as a `file:` URL will not load its JavaScript modules.
+On Windows or Linux, double-click `play.html` after downloading or cloning the repository. It includes the game code, styles, and artwork, works offline, and uses system fonts. You do not need Node.js, npm, Python, or internet access to play. Some browsers restrict saving progress for local files; the game remains playable if saving is blocked.
+
+### Optional development server
+
+With a Node.js version compatible with your operating system (20 or newer), run `npm start`, then open **http://localhost:3000**. No package dependencies need installing. Opening the source `index.html` directly as a `file:` URL will not load its JavaScript modules; use `play.html` for double-click play.
+
+If `npm start` aborts with a macOS `dyld` error about `__libcpp_verbose_abort`, the installed Node executable requires a C++ library symbol unavailable on that macOS installation. Use `play.html` to play without Node. Reinstalling npm packages does not repair the Node executable.
 
 ## Controls
 
@@ -61,8 +76,8 @@ Publishing is manual. The separate **Game checks** workflow tests and builds eve
 ## Develop and check
 
 ```bash
-npm test       # Rules, lantern visibility, inventory, storage, and 200 solvable generated maps
-npm run build  # Produce a portable static site in dist/
+npm run build  # Regenerate play.html and produce a portable static site in dist/
+npm test       # Rules, 200 solvable maps, and standalone bundle integrity
 ```
 
 The build output works under a subdirectory, including GitHub Pages. Upload `dist/` to any static host. No account, backend, API key, or paid service is required to play.
@@ -72,10 +87,11 @@ The build output works under a subdirectory, including GitHub Pages. Upload `dis
 - `src/engine.js` — seeded procedural mazes, inventory, movement, light visibility, and save validation; independent of the browser.
 - `src/game.js` — canvas artwork, keyboard/touch controls, menus, sound effects, and game flow.
 - `index.html` / `style.css` — responsive interface, field notes, inventory, and instructions.
+- `play.html` — generated, self-contained game for direct browser play; committed so players do not need a build tool.
 - `tests/engine.test.js` — deterministic game-rule and procedural solvability tests.
 - `scripts/` — dependency-free development server and static build.
 
-All character, house, and item artwork is drawn with Canvas and SVG. The page requests DM Sans and Fraunces from Google Fonts and falls back to system/Georgia fonts when offline. No analytics or tracking is included.
+All character, house, and item artwork is drawn with Canvas and SVG. The served `index.html` requests DM Sans and Fraunces from Google Fonts and falls back to system/Georgia fonts when offline. The standalone `play.html` uses system fonts and requests no external assets. No analytics or tracking is included. After editing the source, run `npm run build` and commit the regenerated `play.html` alongside your changes.
 
 ### Adding a chapter
 
